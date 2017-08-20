@@ -71,6 +71,9 @@ Add Quality Gates Sonarqube plugin
 provide project key(edit POM.xml under group id mphasis to javahome)
 in.javahome:DevOpsDemoProject
 
+Save and click Build Now
+
+
 Create Job3 - CodeDeploy
 ~~~~~~~~~~~~~~~~~~~
 
@@ -92,7 +95,7 @@ Create Job3 - CodeDeploy
 
 /usr/share/apache-maven/conf/settings.xml
 
-add the below code
+add the below code, having the same user id as in the pom.xml
 
     <server>
       <id>deployment</id>
@@ -104,6 +107,9 @@ add the below code
 
 Manage Jenkins -->Reload Configuration from Disk
 
+Save and click Build now.
+
+------------------------------------
 
 JENKINS
 ssh -i "MyWebKeypair.pem" ec2-user@ec2-35-176-185-63.eu-west-2.compute.amazonaws.com
