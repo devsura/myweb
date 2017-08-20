@@ -71,6 +71,40 @@ Add Quality Gates Sonarqube plugin
 provide project key(edit POM.xml under group id mphasis to javahome)
 in.javahome:DevOpsDemoProject
 
+Create Job3 - CodeDeploy
+~~~~~~~~~~~~~~~~~~~
+
+1. Update pom.xml- with public ip of Nexus Instance	
+        <repository>
+            <id>deployment</id>
+            <name>Internal Releases</name>
+            <url>http://35.177.25.151:8081/nexus/content/repositories/releases/</url>
+			<uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+            <id>deployment</id>
+            <name>Internal Snapshot Releases</name>
+                     <url>http://35.177.25.151:8081/nexus/content/repositories/snapshots/</url>
+			<uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+
+2. Update settings.xml in Jenkins Instance
+
+/usr/share/apache-maven/conf/settings.xml
+
+add the below code
+
+    <server>
+      <id>deployment</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+
+3. Restart the Jenkins service/reload
+
+Manage Jenkins -->Reload Configuration from Disk
+
+
 JENKINS
 ssh -i "MyWebKeypair.pem" ec2-user@ec2-35-176-185-63.eu-west-2.compute.amazonaws.com
 
