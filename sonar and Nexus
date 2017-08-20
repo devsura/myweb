@@ -56,7 +56,7 @@ https://github.com/aji1234/client-demo-project.git
 No password required
 Build:
 Root POM : pom.xml
-Goals and options: sonar:sonar -Dsonar.host.url=http://35.177.39.233:9000
+Goals and options: clean install sonar:sonar -Dsonar.host.url=http://35.177.39.233:9000
 Save & Click Build Now
 
 Create Job2 - CodeCoverage with Quality gates
