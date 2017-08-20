@@ -1,0 +1,83 @@
+Instance
+=======
+1 - Jenkins + Maven + Git
+1 - Nexus
+1 - sonarQube
+
+Jenkins Install:
+=============
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+sudo yum install jenkins -y
+
+sudo service jenkins start
+sudo chkconfig --add jenkins
+
+Maven Install:
+=============
+sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+sudo yum install -y apache-maven
+mvn --version
+
+In Jenkins: Initial Settings
+======================
+Name - MAVEN_HOME
+MAVEN_HOME - /usr/share/apache-maven
+ManageJenkins - Manage Plugins - Search for Maven - 
++ Install all plugins with keyword 'Maven'
++ Install Sonar Quality Gates Plugin
+ 
+Install without No restart
+
+
+Add
+Manage Jenkins -->Go to Configure system--> Quality Gates-Sonarqube
+Name:SonarInstance
+SonarQube Server URL:http://35.177.39.233:9000/
+admin
+admin
+
+Name - JDK_HOME
+JAVA_HOME - /usr/lib/jvm/java-1.8.0-openjdk
+
+Name - GIT_HOME
+Path to Git executable  - /usr/bin/git
+
+
+In Jenkins:
+=========
+Create job1  - CodeAnalysis
+~~~~~~~~~~~~~~~~~~~~
+
+Select Source Code Management - Git
+Git:
+https://github.com/aji1234/client-demo-project.git
+No password required
+Build:
+Root POM : pom.xml
+Goals and options: sonar:sonar -Dsonar.host.url=http://35.177.39.233:9000
+Save & Click Build Now
+
+Create Job2 - CodeCoverage with Quality gates
+~~~~~~~~~~~~~~~~~~~~~
+Build:
+Root POM : pom.xml
+Goals and options: clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar  -Dsonar.host.url=http://35.177.39.233:9000
+
+Post Build Actions:
+Add Quality Gates Sonarqube plugin
+
+provide project key(edit POM.xml under group id mphasis to javahome)
+in.javahome:DevOpsDemoProject
+
+JENKINS
+ssh -i "MyWebKeypair.pem" ec2-user@ec2-35-176-185-63.eu-west-2.compute.amazonaws.com
+
+SONARQUBE
+ssh -i "MyWebKeypair.pem" ec2-user@ec2-35-177-39-233.eu-west-2.compute.amazonaws.com
+http://35.177.39.233:9000
+
+NEXUS
+ssh -i "MyWebKeypair.pem" ec2-user@ec2-35-177-25-151.eu-west-2.compute.amazonaws.com
+http://35.177.25.151:8081/nexus/
