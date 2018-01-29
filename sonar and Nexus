@@ -4,6 +4,11 @@ Instance
 1 - Nexus
 1 - sonarQube
 
+JDK 1.8  install
+================
+sudo yum install java-1.8.0-openjdk
+sudo update-alternatives --config java
+
 Jenkins Install:
 =============
 sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
