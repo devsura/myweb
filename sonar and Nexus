@@ -27,6 +27,7 @@ mvn --version
 
 In Jenkins: Initial Settings
 ======================
+Under Global Tool Configuration
 Name - MAVEN_HOME
 MAVEN_HOME - /usr/share/apache-maven
 ManageJenkins - Manage Plugins - Search for Maven - 
@@ -43,6 +44,7 @@ SonarQube Server URL:http://35.177.39.233:9000/
 admin
 admin
 
+Under Global Tool Configuration
 Name - JDK_HOME
 JAVA_HOME - /usr/lib/jvm/java-1.8.0-openjdk
 
